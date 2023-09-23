@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1-labs
-FROM nvidia/cuda:11.7.1-devel-ubuntu22.04
+FROM nvidia/cuda:11.8.0-devel-ubuntu22.04
 
 # Update Apt repositories
 RUN apt-get update 
@@ -7,6 +7,8 @@ RUN apt-get update
 # Install and configure Python
 RUN apt-get -y --no-install-recommends install wget build-essential python3.10 python3-pip
 RUN update-alternatives --install /usr/bin/python  python /usr/bin/python3.10 1
+RUN pip3 config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+RUN pip3 install --upgrade pip
 RUN pip install setuptools streamlit-chat
 
 ENV WORKDIR /fastllm
